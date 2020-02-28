@@ -1,1 +1,13 @@
-/*style.css
+* {
+    color: darkblue;
+}
+
+body {
+    /* height: 1000px; */
+    border: red solid 2px;
+    background-color: aliceblue;
+}
+
+h1 {
+    font-size: large;
+}
