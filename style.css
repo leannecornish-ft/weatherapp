@@ -4,15 +4,8 @@
 
 body {
     font-family: Calibri;
-    border: red solid 2px;
     background-color: whitesmoke;
     text-align: center;
-}
-
-
-
-div {
-    border: red solid 1px;
 }
 
 header {
@@ -39,41 +32,38 @@ header {
     opacity: 0.8;
 }
 
-#forecast {
-    visibility: hidden;
-}
-
-/* .city {
-    display: inline;
-} */
-
 #location-input {
     min-height: 900px;
+    padding-top: 200px;
 }
 
-#location-text {
-    display: inline;
-    border: solid red 1px;
+/* #location-text {
+    display: inline-flex;
     font-size: 22px;
-}
+    margin-right: 10px;
+    height: 50px;
+} */
 
 form {
-    display: inline;
-    border: solid red 1px;
+    display: inline-flex;
 }
 
 input {
-    height: 50px;
     font-family: Calibri;
     font-size: 22px;
+    margin-right: 10px;
+    text-align: center;
+    color: lightgrey
 }
 
 #button {
     font-family: Calibri;
     font-size: 22px;
     color: white;
-    border-radius: 6px;
+    border: 0;
     background-color: darkslategray;
     width: 200px;
     height: 50px
 }
+
+
