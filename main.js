@@ -1,8 +1,10 @@
 //main.js
 
-// //link the button and change color when roll over
+//Get HTML Elements from index.html
 let button = document.getElementById('button');
+let form = document.getElementById('send-form');
 
+// //link the button and change color when roll over
 // button.onmouseover = () => { 
 //     button.style.backgroundColor = 'slategray';
 // }
@@ -35,30 +37,31 @@ document.getElementById('forecast').hidden = true;
 const weatherKey = '014de69db2b0b78116006b5a3fb13332'
 const weatherURL = 'https://api.openweathermap.org/data/2.5/weather?q='
 
-
 const getData = async () => {
-  const userText = document.getElementById('input').value  
-  console.log('user text:' + userText)
+  //const userText = document.getElementById('input').value  
+  const city = 'Leeds'
+  const urlToFetch = `${weatherURL}${city}&appid=${weatherKey}`
   try {
-    const response = await fetch(`${weatherURL}${userText}&appid=${weatherKey}`) 
-    console.log(response.ok) 
+    const response = await fetch(urlToFetch)
     if (response.ok) {
       const jsonResponse = await response.json()
       console.log(jsonResponse)
       return jsonResponse;
     }
-    throw new Error('Request failed!')
-  }
+      throw new Error('Request failed!')
+    }
   catch(error) {
     console.log(error)
     }
   }
 
+
 const displayWeather = () => {
+  console.log('displayWeather')
   getData()
 }
 
-button.addEventListener('click', displayWeather) 
+form.addEventListener("submit", displayWeather)
 
 getData()
 
