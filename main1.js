@@ -3,6 +3,7 @@
 //Get HTML Elements from index.html
 let button = document.getElementById('button');
 let form = document.getElementById('send-form');
+let forecast = document.getElementById('forecast');
 
 // //link the button and change color when roll over
 // button.onmouseover = () => { 
@@ -39,13 +40,15 @@ const weatherURL = 'https://api.openweathermap.org/data/2.5/weather?q='
 
 const getData = async () => {
   //const userText = document.getElementById('input').value  
-  const city = 'London'
+  const city = 'Leeds'
   const urlToFetch = `${weatherURL}${city}&appid=${weatherKey}`
   try {
     const response = await fetch(urlToFetch)
+    console.log('response ok: ' + response.ok)
+    console.log('response: ' + response)
     if (response.ok) {
       const jsonResponse = await response.json()
-      console.log(jsonResponse)
+      console.log('jsonResponse: ' + jsonResponse)
       return jsonResponse;
     }
       throw new Error('Request failed!')
@@ -55,18 +58,28 @@ const getData = async () => {
     }
   }
 
-  const renderWeather = (item) => {
-    return `${item.weather[0].description}`
-  }
+const renderWeather = (item) => {
+  return `<p>${item.weather[0].description}</p>`
+} 
 
 
 const displayWeather = () => {
   getData().then(item => {
-    forecast.hidden = false;
-    return forecast.append(renderWeather(item))
+    forecast.append(renderWeather(item))
   })
+  forecast.hidden = false;
+  
 }
 
 form.addEventListener("submit", displayWeather)
 
 displayWeather()
+
+
+
+
+
+
+
+
+
