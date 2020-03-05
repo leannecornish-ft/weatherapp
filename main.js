@@ -3,6 +3,7 @@
 //Get HTML Elements from index.html
 let button = document.getElementById('button');
 let form = document.getElementById('send-form');
+let locationInput = document.getElementById('location-input')
 
 // //link the button and change color when roll over
 // button.onmouseover = () => { 
@@ -60,13 +61,30 @@ const getData = async () => {
   }
 
 
-const displayWeather = () => {
+const displayWeather = (event) => {
+  event.preventDefault();
   getData().then(item => {
     forecast.hidden = false;
+    locationInput.hidden = true;
     return forecast.append(renderWeather(item))
   })
 }
 
+// const displaySuggestions = (event) => {
+//   event.preventDefault();
+//   while(responseField.firstChild){
+//     responseField.removeChild(responseField.firstChild);
+//   }
+//   getSuggestions();
+// };
+
+// submit.addEventListener('click', displaySuggestions);
+
+// function handleForm(event) { event.preventDefault();
+
 form.addEventListener("submit", displayWeather)
 
-displayWeather()
+
+
+
+//getData()
