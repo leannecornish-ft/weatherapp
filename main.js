@@ -4,6 +4,7 @@
 let button = document.getElementById('button');
 let form = document.getElementById('send-form');
 let locationInput = document.getElementById('location-input')
+let userText = document.getElementById('input')  
 
 // //link the button and change color when roll over
 // button.onmouseover = () => { 
@@ -39,8 +40,7 @@ const weatherKey = '014de69db2b0b78116006b5a3fb13332'
 const weatherURL = 'https://api.openweathermap.org/data/2.5/weather?q='
 
 const getData = async () => {
-  //const userText = document.getElementById('input').value  
-  const city = 'London'
+  const city = userText.value
   const urlToFetch = `${weatherURL}${city}&appid=${weatherKey}`
   try {
     const response = await fetch(urlToFetch)

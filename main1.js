@@ -73,7 +73,7 @@ const displayWeather = () => {
 
 form.addEventListener("submit", displayWeather)
 
-displayWeather()
+getData()
 
 
 
