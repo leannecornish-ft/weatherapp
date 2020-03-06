@@ -66,4 +66,15 @@ input {
     height: 50px
 }
 
+#forecast {
+    padding-top: 200px;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+img {
+    background-color: darkslategray;
+}
 

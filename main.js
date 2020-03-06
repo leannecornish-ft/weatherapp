@@ -1,10 +1,10 @@
-//main.js
-
 //Get HTML Elements from index.html
 let button = document.getElementById('button');
 let form = document.getElementById('send-form');
-let locationInput = document.getElementById('location-input')
-let userText = document.getElementById('input')  
+let locationInput = document.getElementById('location-input');
+let userText = document.getElementById('input'); 
+let forecast = document.getElementById('forecast'); 
+let description = document.getElementById('description');
 
 // //link the button and change color when roll over
 // button.onmouseover = () => { 
@@ -30,15 +30,17 @@ let userText = document.getElementById('input')
 // }
 
 //hide the weather results secion until form submitted
-document.getElementById('forecast').hidden = true;
+forecast.hidden = true;
 
 
 
-//submit 
+//API variables 
 
 const weatherKey = '014de69db2b0b78116006b5a3fb13332'
 const weatherURL = 'https://api.openweathermap.org/data/2.5/weather?q='
 
+
+//AJAX request
 const getData = async () => {
   const city = userText.value
   const urlToFetch = `${weatherURL}${city}&appid=${weatherKey}`
@@ -56,35 +58,33 @@ const getData = async () => {
     }
   }
 
+//Selecting items to display  
   const renderWeather = (item) => {
-    return `${item.weather[0].description}`
+    let temperature = Math.floor(item.main.temp - 273.15)
+    let feelsLike = Math.floor(item.main.feels_like - 273.15)
+    return `<h1>${item.name}</h1>
+    <h2>Conditions: ${item.weather[0].description}</h2>
+    <h2>Temperature: ${temperature}&deg</h2>
+    <h2>Wind speed: ${item.wind.speed}</h2>
+    <h2>Feels like: ${feelsLike}&deg</h2>
+    <img src="http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png">`
   }
 
 
+//Calling getData() to make the API call. Adding rendered return to page.
 const displayWeather = (event) => {
   event.preventDefault();
   getData().then(item => {
     forecast.hidden = false;
     locationInput.hidden = true;
-    return forecast.append(renderWeather(item))
+    return forecast.innerHTML = (renderWeather(item))
   })
 }
 
-// const displaySuggestions = (event) => {
-//   event.preventDefault();
-//   while(responseField.firstChild){
-//     responseField.removeChild(responseField.firstChild);
-//   }
-//   getSuggestions();
-// };
 
-// submit.addEventListener('click', displaySuggestions);
-
-// function handleForm(event) { event.preventDefault();
-
+//Listener for submitting the form
 form.addEventListener("submit", displayWeather)
 
 
 
 
-//getData()
