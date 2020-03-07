@@ -5,32 +5,44 @@ let locationInput = document.getElementById('location-input');
 let userText = document.getElementById('input'); 
 let forecast = document.getElementById('forecast'); 
 let description = document.getElementById('description');
+let reset = document.getElementById('reset');
 
-// //link the button and change color when roll over
-// button.onmouseover = () => { 
-//     button.style.backgroundColor = 'slategray';
+
+//link the button and change color when roll over
+
+// const mouseOverColour = (source) => {
+//   source.style.backgroundColor = 'slategray';
 // }
 
-// button.onmouseout = () => { 
-//     button.style.backgroundColor = 'darkslategray';
+// const mouseOutColour = (source) => {
+//   source.style.backgroundColor = 'darkslategray';
 // }
 
+button.onmouseover = () => { 
+    button.style.backgroundColor = 'slategray';
+}
 
-// //removes value from input field when typing 
-// let inputField = document.getElementById('input');
+button.onmouseout = () => { 
+    button.style.backgroundColor = 'darkslategray';
+}
 
-// inputField.onblur = () => {
-//     inputField.value = 'Paris'
-//     inputField.style.color = 'lightgray'
-// }
 
-// inputField.onfocus = () => {
-//     inputField.value = ''
-//     inputField.style.color = 'black'
-// }
+//removes value from input field when typing 
+let inputField = document.getElementById('input');
+
+inputField.onblur = () => {
+    inputField.value = 'enter city'
+    inputField.style.color = 'lightgray'
+}
+
+inputField.onfocus = () => {
+    inputField.value = ''
+    inputField.style.color = 'black'
+}
 
 //hide the weather results secion until form submitted
 forecast.hidden = true;
+reset.hidden = true;
 
 
 
@@ -62,12 +74,13 @@ const getData = async () => {
   const renderWeather = (item) => {
     let temperature = Math.floor(item.main.temp - 273.15)
     let feelsLike = Math.floor(item.main.feels_like - 273.15)
-    return `<h1>${item.name}</h1>
+    let date = Date.now();
+    return `<h1>The weather in ${item.name}, ${item.sys.country}</h1>
+    <img src="http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png">
     <h2>Conditions: ${item.weather[0].description}</h2>
     <h2>Temperature: ${temperature}&deg</h2>
-    <h2>Wind speed: ${item.wind.speed}</h2>
     <h2>Feels like: ${feelsLike}&deg</h2>
-    <img src="http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png">`
+    <h2>Wind speed: ${item.wind.speed}mph</h2>`
   }
 
 
@@ -76,14 +89,25 @@ const displayWeather = (event) => {
   event.preventDefault();
   getData().then(item => {
     forecast.hidden = false;
+    reset.hidden = false;
     locationInput.hidden = true;
     return forecast.innerHTML = (renderWeather(item))
   })
 }
 
 
-//Listener for submitting the form
-form.addEventListener("submit", displayWeather)
+//Reset 
+const resetPage = () => {
+  locationInput.hidden = false;
+  forecast.hidden = true;
+  reset.hidden = true;
+  userText.value = 'enter city'
+  userText.style.color = 'lightgray'
+}
+
+//Listener for submitting the form and resetting
+form.addEventListener("submit", displayWeather);
+reset.addEventListener("click", resetPage);
 
 
 

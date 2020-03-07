@@ -34,7 +34,7 @@ header {
 
 #location-input {
     min-height: 900px;
-    padding-top: 200px;
+    padding-top: 100px;
 }
 
 /* #location-text {
@@ -67,14 +67,27 @@ input {
 }
 
 #forecast {
-    padding-top: 200px;
+    padding: 80px;
 }
 
 h1 {
     font-size: 40px;
+    margin-top: 0;
 }
+
 
 img {
-    background-color: darkslategray;
+    background-color: white;
 }
 
+
+#reset {
+    padding: 13px;
+    color: white;
+    margin: 0 auto;
+    font-family: Calibri;
+    font-size: 22px;
+    border: 0;
+    background-color: darkslategray;
+    width: 200px;
+}
