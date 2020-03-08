@@ -8,15 +8,9 @@ let description = document.getElementById('description');
 let reset = document.getElementById('reset');
 
 
+
 //link the button and change color when roll over
 
-// const mouseOverColour = (source) => {
-//   source.style.backgroundColor = 'slategray';
-// }
-
-// const mouseOutColour = (source) => {
-//   source.style.backgroundColor = 'darkslategray';
-// }
 
 button.onmouseover = () => { 
     button.style.backgroundColor = 'slategray';
@@ -26,23 +20,29 @@ button.onmouseout = () => {
     button.style.backgroundColor = 'darkslategray';
 }
 
-
-//removes value from input field when typing 
-let inputField = document.getElementById('input');
-
-inputField.onblur = () => {
-    inputField.value = 'enter city'
-    inputField.style.color = 'lightgray'
+reset.onmouseover = () => { 
+  reset.style.backgroundColor = 'slategray';
 }
 
-inputField.onfocus = () => {
-    inputField.value = ''
-    inputField.style.color = 'black'
+reset.onmouseout = () => { 
+    reset.style.backgroundColor = 'darkslategray';
+}
+
+
+//removes value from input field when typing 
+
+userText.onfocus = () => {
+    userText.value = ''
+    userText.style.color = 'black'
 }
 
 //hide the weather results secion until form submitted
 forecast.hidden = true;
 reset.hidden = true;
+
+const userException = () => {
+  forecast.innerHTML = "Please enter a city"
+}
 
 
 
@@ -63,10 +63,13 @@ const getData = async () => {
       console.log(jsonResponse)
       return jsonResponse;
     }
-      throw new Error('Request failed!')
+    throw "<h2>Invalid city, please try again</h2>"
+      
     }
   catch(error) {
-    console.log(error)
+    console.log(error);
+    forecast.innerHTML = error
+    resetPage()
     }
   }
 
@@ -74,7 +77,6 @@ const getData = async () => {
   const renderWeather = (item) => {
     let temperature = Math.floor(item.main.temp - 273.15)
     let feelsLike = Math.floor(item.main.feels_like - 273.15)
-    let date = Date.now();
     return `<h1>The weather in ${item.name}, ${item.sys.country}</h1>
     <img src="http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png">
     <h2>Conditions: ${item.weather[0].description}</h2>
