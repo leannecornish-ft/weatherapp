@@ -48,7 +48,7 @@ const userException = () => {
 
 //API variables 
 
-const weatherKey = '014de69db2b0b78116006b5a3fb13332'
+const weatherKey = 'XXX'
 const weatherURL = 'https://api.openweathermap.org/data/2.5/weather?q='
 
 
